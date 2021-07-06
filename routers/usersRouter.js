@@ -1,15 +1,17 @@
 const express = require("express");
 const usersRouter = express.Router();
 const datasUser = require("../db/index");
-
-usersRouter.get("/:limit", (req, res, next) => {
-  const limit = req.params.limit;
-  const data = datasUser.slice(0, limit);
-  res.status(202).json(data);
-});
+const pool = require("../db/index");
 
 usersRouter.get("/", (req, res, next) => {
-  res.status(202).json(datasUser);
+  const data = [];
+	pool.query('SELECT * FROM accounts', (error, results) => {
+    if (error) {
+      throw error
+    }
+    res.status(200).json(results.rows);
+		return;
+  });
 });
 
 usersRouter.get("/", (req, res, next) => {

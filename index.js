@@ -13,5 +13,5 @@ const usersRouter = require("./routers/usersRouter");
 app.use("/users", usersRouter);
 
 app.listen(PORT, () => {
-  console.log("listening on port" + PORT);
+  console.log("listening on port " + PORT);
 });
